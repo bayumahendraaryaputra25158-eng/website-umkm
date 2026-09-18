@@ -1,49 +1,55 @@
 body {
-    margin: 0;
-    color: #2f2118;
-    background: #f6f0e8;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  color: #2f2118;
+  background: #f6f0e8;
+  font-family: Arial, sans-serif;
 }
 
 .page {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 32px 20px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 20px;
 }
 
 .hero {
-    padding: 36px;
-    color: white;
-    background: #6f3b1f;
-    border-radius: 24px;
+  padding: 36px;
+  color: white;
+  background: #af9e08;
+  border-radius: 24px;
 }
 
 .eyebrow {
-    margin: 0 0 8px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  margin: 0 0 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h2 {
+    text-align: center;
 }
 
 .products {
-    padding-left: 1.2rem;
+  padding-left: 1.2rem;
+  list-style: none;
 }
 
 button {
-    padding: 12px 18px;
-    color:#2f2118;
-    font-weight: 700;
-    cursor: pointer;
-    background: #ffd166;
-    border: 0;
-    border-radius: 999px;
-
+  padding: 12px 18px;
+  color: #2f2118;
+  font-weight: 700;
+  cursor: pointer;
+  background: #ffd166;
+  border: 0;
+  border-radius: 999px;
 }
-.promo-text {
-    display: none;
-    margin-top: 15px;
-    padding: 15px 20px;
-    background: #ffd166;
-    color: #2f2118;
-    border-radius: 12px;
-    font-weight: bold;
-}
+.skip-link { position: absolute; left: -9999px; padding: 8px 12px; color: white; background: #2f2118; }
+.skip-link:focus { top: 8px; left: 8px; }
+.site-header { padding: 16px 20px; background: white; border-bottom: 1px solid #dccbbc; }
+.nav { max-width: 920px; margin: 0 auto; }
+.brand { display: inline-block; margin-bottom: 8px; color: #4b2715; font-weight: 800; text-decoration: none; }
+.nav ul { padding: 0; margin: 0; list-style: none; }
+.nav li { display: inline-block; margin-right: 12px; }
+.nav a[aria-current="page"] { font-weight: 800; }
+a:focus-visible,
+button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
+.site-footer { padding: 24px 20px; color: white; text-align: center; background: #2f2118; }
