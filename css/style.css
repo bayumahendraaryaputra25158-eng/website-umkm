@@ -1,8 +1,23 @@
+:root {
+  --coklat-tua: #2f2118;
+  --coklat: #6f3b1f;
+  --coklat-brand: #4b2715;
+  --krem: #f6f0e8;
+  --kuning: #ffd166;
+  --garis: #dccbbc;
+  --abu-teks: #5a4a41;
+  --putih: #ffffff;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  color: #2f2118;
-  background: #f6f0e8;
-  font-family: Arial, sans-serif;
+  color: var(--coklat-tua);
+  background: var(--krem);
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
 }
 
 .page {
@@ -11,45 +26,269 @@ body {
   padding: 32px 20px;
 }
 
-.hero {
-  padding: 36px;
-  color: white;
-  background: #af9e08;
-  border-radius: 24px;
+.page > section { margin-bottom: 40px; }
+
+h1, h2, h3 { line-height: 1.25; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 100;
+  padding: 8px 12px;
+  color: var(--putih);
+  background: var(--coklat-tua);
 }
+
+.skip-link:focus { top: 8px; left: 8px; }
+
+.site-header {
+  padding: 16px 20px;
+  background: var(--putih);
+  border-bottom: 1px solid var(--garis);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.brand {
+  color: var(--coklat-brand);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav a {
+  color: var(--coklat-tua);
+  text-decoration: none;
+}
+
+.nav a:hover { text-decoration: underline; }
+
+.nav a[aria-current="page"] {
+  color: var(--coklat);
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+.hero {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero > img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.hero-content {
+    text-align: center;
+    padding: 20px;
+}
+
+
+.hero-content p {
+    font-size: 18px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+
+.hero-content h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 70px;
+
+    margin-bottom: 20px;
+}
+
+
+.hero-content h2 {
+    max-width: 650px;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+.hero-content button {
+    background: #f5c451;
+
+    color: #432312;
+
+    border: none;
+
+    padding: 16px 30px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.hero h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 5vw, 2.6rem); }
 
 .eyebrow {
   margin: 0 0 8px;
+  font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-h2 {
-    text-align: center;
-}
-
-.products {
-  padding-left: 1.2rem;
-  list-style: none;
-}
-
 button {
   padding: 12px 18px;
-  color: #2f2118;
+  color: var(--coklat-tua);
+  font-size: 1rem;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
-  background: #ffd166;
+  background: var(--kuning);
   border: 0;
   border-radius: 999px;
 }
-.skip-link { position: absolute; left: -9999px; padding: 8px 12px; color: white; background: #2f2118; }
-.skip-link:focus { top: 8px; left: 8px; }
-.site-header { padding: 16px 20px; background: white; border-bottom: 1px solid #dccbbc; }
-.nav { max-width: 920px; margin: 0 auto; }
-.brand { display: inline-block; margin-bottom: 8px; color: #4b2715; font-weight: 800; text-decoration: none; }
-.nav ul { padding: 0; margin: 0; list-style: none; }
-.nav li { display: inline-block; margin-right: 12px; }
-.nav a[aria-current="page"] { font-weight: 800; }
+
+button:hover { background: #ffc233; }
+
 a:focus-visible,
 button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
-.site-footer { padding: 24px 20px; color: white; text-align: center; background: #2f2118; }
+
+.product-list,
+.info-container,
+.gallery-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Kartu produk baru tampil lebih lebar dan sendirian */
+.product-list--sorot { grid-template-columns: minmax(0, 480px); }
+
+.product-card,
+.info-card,
+.media-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--putih);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+}
+
+.product-card h3,
+.info-card h3 { margin: 0 0 8px; }
+
+.product-card p,
+.info-card p { margin: 0 0 8px; }
+
+.product-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 12px;
+  background: var(--krem);
+}
+
+.media-card .product-photo { margin-bottom: 0; }
+
+.product-photo--lebar { max-width: 520px; }
+
+.price {
+  margin-top: auto;
+  color: var(--coklat);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.price .unit {
+  color: var(--abu-teks);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.product-card--baru {
+  position: relative;
+  border-color: var(--coklat);
+}
+
+.produk-card2 {
+  padding-top: 35px;
+
+}
+
+.badge {
+  align-self: flex-start;
+  padding: 2px 10px;
+  margin-bottom: 8px;
+  color: var(--coklat-tua);
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--kuning);
+  border-radius: 999px;
+}
+
+img { display: block; max-width: 100%; height: auto; border-radius: var(--radius); }
+figure { margin: 0; }
+figcaption { margin-top: 8px; color: var(--abu-teks); font-size: 0.92rem; }
+
+audio { width: 100%; max-width: 420px; margin-top: 8px; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--putih); }
+caption { margin-bottom: 8px; font-weight: 700; text-align: left; }
+th,
+td { padding: 10px; text-align: left; border: 1px solid var(--garis); }
+thead th { background: #efe4d8; }
+tbody tr:nth-child(even) th,
+tbody tr:nth-child(even) td { background: #faf5ef; }
+td:last-child,
+thead th:last-child { text-align: right; white-space: nowrap; }
+
+.site-footer {
+  padding: 24px 20px;
+  color: var(--putih);
+  text-align: center;
+  background: var(--coklat-tua);
+}
+
+.site-footer a { color: var(--kuning); }
+
+@media (max-width: 600px) {
+  .page { padding: 24px 16px; }
+  .hero { padding: 24px; border-radius: 18px; }
+  .nav { justify-content: flex-start; }
+}
