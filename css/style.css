@@ -820,3 +820,164 @@ th {
         grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 }
+
+
+
+/* Sembunyikan hamburger pada desktop */
+@media screen and (min-width: 769px) {
+    .mobile-menu {
+        display: none !important;
+    }
+
+    .desktop-menu {
+        display: flex !important;
+    }
+}
+
+/* Tampilkan hamburger hanya pada HP */
+@media screen and (max-width: 768px) {
+    .mobile-menu {
+        display: block !important;
+    }
+
+    .desktop-menu {
+        display: none !important;
+    }
+}
+
+
+
+/* =================================
+   KARTU PRODUK DINAMIS P10
+================================= */
+
+.js-product-card {
+    position: relative;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #eaded5;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease;
+}
+
+.js-product-card:hover {
+    transform: translateY(-5px);
+}
+
+.js-product-card h3 {
+    color: #4b2e20;
+    margin-top: 15px;
+}
+
+.category-note {
+    color: #80624f;
+    font-size: 14px;
+}
+
+.price {
+    color: #8b4b27;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Label stok */
+.stock-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-top: 8px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.stock-badge.warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* Label produk unggulan */
+.featured-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Ringkasan */
+#produk-ringkasan {
+    margin: 15px 0;
+    color: #665044;
+}
+
+#produk-unggulan {
+    font-weight: bold;
+    color: #6f3b1f;
+    margin-bottom: 20px;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .js-product-card {
+        padding: 18px;
+    }
+}
+
+
+/* Gambar halaman Tentang Kami */
+.about-image {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    height: auto;
+    margin: 25px auto 0;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Tampilan kartu Tentang Kami */
+.about-card {
+    max-width: 720px;
+    width: 90%;
+    margin: 35px auto;
+    padding: 25px;
+    background-color: #795548;
+    color: white;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+    .about-card {
+        width: 94%;
+        padding: 18px;
+    }
+
+    .about-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.about-image {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    height: auto;
+    margin: 25px auto;
+    border-radius: 15px;
+
+    /* Membantu menyamarkan latar hitam */
+    mix-blend-mode: screen;
+}
