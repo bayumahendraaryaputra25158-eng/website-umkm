@@ -1,217 +1,233 @@
 <!doctype html>
 <html lang="id">
   <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Produk Kopi Gunung Lumping - Website UMKM</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-        <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
-    </head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Produk Kopi Gunung Lumping - Website UMKM</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <script src="js/app.js" defer></script>
+  </head>
   <body>
-        <a class="skip-link" href="#konten">Lewati ke konten utama</a>
-        <header class="site-header">
-        <nav class="nav" aria-label="Navigasi utama">
-            <a class="brand" href="index.html">
-          </span>
+    <a class="skip-link" href="#konten">Lewati ke konten utama</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="index.html">
           <span class="brand-text">
             <span class="brand-name">Kopi Gunung Lumping</span>
           </span>
         </a>
-            <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="tentang.html">Tentang Kami</a></li>
-                <li><a aria-current="page" href="produk.html">Produk</a></li>
-                <li><a href="galeri.html">Galeri</a></li>
-                <li><a href="kontak.html">Kontak</a></li>
-            </ul>
-        </nav>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang Kami</a></li>
+          <li><a aria-current="page" href="produk.html">Produk</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </nav>
     </header>
+
     <main id="konten" class="page">
-        <h1>Produk Kopi Gunung Lumping</h1>
-        <p>Pilih produk sesuai kebutuhan anda.</p>
+      <h1>Produk Kopi Gunung Lumping</h1>
+      <p>Pilih produk sesuai kebutuhan anda.</p>
+      <figure>
         <img class="hero-image" src="assets/images/Sajian Kopi Gunung Lumping Bernuansa Rustic.png" alt="gambar menu kopi seduhan Kopi Gunung Lumping">
-        <figcaption>Menu Kopi Seduhan dari Kopi Gunung Lumping  tersedia berbagai macam ukuran dengan banyak variasi harga.</figcaption>
-            
-        <section class="section" aria-labelledby="produk-dinamis-title">
-            <div class="section-header">
-                <p class="eyebrow">Data JavaScript</p>
-                <h2 id="produk-dinamis-title">Produk dari Data Lokal</h2>
-                <p id="produk-ringkasan">Data produk akan dimuat melalui JavaScript.</p>
-                <p id="produk-unggulan">Produk unggulan akan ditentukan melalui JavaScript.</p>
-            </div>
-            <div id="produk-dinamis" class="js-product-grid"></div>
-        </section>
-        <h2>Produk Unggulan</h2>
-            <div class="product-grid">
-            <article class="product-card">
+        <figcaption>Menu Kopi Seduhan dari Kopi Gunung Lumping tersedia berbagai macam ukuran dengan banyak variasi harga.</figcaption>
+      </figure>
+
+      <!-- ===== P11: Katalog dinamis dengan filter kategori ===== -->
+      <section class="section product-section" aria-labelledby="produk-title">
+        <div class="section-heading section-header">
+          <p class="eyebrow">Katalog</p>
+          <h2 id="produk-title">Produk dari Data Lokal</h2>
+          <p id="produk-status" class="produk-status">Produk belum dimuat.</p>
+          <p id="produk-unggulan">Produk unggulan akan ditentukan melalui JavaScript.</p>
+        </div>
+
+        <div class="filter-bar" aria-label="Filter kategori produk">
+          <button type="button" class="filter-button is-active" data-filter="Semua">Semua</button>
+          <button type="button" class="filter-button" data-filter="Kopi">Kopi</button>
+          <button type="button" class="filter-button" data-filter="Bundling">Bundling</button>
+          <button type="button" class="filter-button" data-filter="Aksesori">Aksesori</button>
+          <!-- Kategori tanpa data, dipakai untuk menguji empty state (E06) -->
+          <button type="button" class="filter-button" data-filter="Makanan">Makanan</button>
+        </div>
+
+        <div id="produk-grid" class="product-grid js-product-grid" aria-live="polite"></div>
+      </section>
+      <!-- ===== Akhir P11 ===== -->
+
+      <section aria-labelledby="produk-unggulan-title">
+        <h2 id="produk-unggulan-title">Produk Unggulan</h2>
+        <div class="product-grid">
+          <article class="product-card">
             <img
-                    class="product-photo"
-                    src="assets/images/Kopi Gula Aren di Atas Coaster LOWCONT.png"
-                    alt="Cappuccino dengan susu dan busa susu tebal"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-      />
-                    <h3>Latte Caramel</h3>
-                    <p>Kopi dengan dengan tambahan sirup caramel dan susu segar.</p>
-                    <p class="price">Rp25.000</p>
-                    <div class="card-actions">
-                        <a class="button" href="kontak.html">Tanya produk</a>
-                        <a href="produk.html">Lihat produk</a>
-                    </div>
-                </article>
-                <article class="product-card">
-                <img
-                    class="product-photo"
-                    src="assets/images/Americano.jpg"
-                    alt="Cappuccino dengan susu dan busa susu tebal"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                />
-                    <h3>Americano</h3>
-                    <p>Espresso dengan air, bercita rasa ringan dan pahit.</p>
-                    <p class="price">Rp22.000</p>
-                    <div class="card-actions">
-                        <a class="button" href="kontak.html">Tanya produk</a>
-                        <a href="produk.html">Lihat produk</a>
-                    </div>
-                </article>
-                <article class="product-card">
-                <img
-                    class="product-photo"
-                    src="assets/images/Kopi Latte Berbusa di atas Coaster.png"
-                    alt="Cappuccino dengan susu dan busa susu tebal"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                />
-                    <h3>Capuccino</h3>
-                    <p>Kopi dengan susu dan busa susu tebal, disajikan panas.</p>
-                    <p class="price">Rp20.000</p>
-                    <div class="card-actions">
-                        <a class="button" href="kontak.html">Tanya produk</a>
-                        <a href="produk.html">Lihat produk</a>
-                    </div>
-                </article>
+              class="product-photo"
+              src="assets/images/Kopi Gula Aren di Atas Coaster LOWCONT.png"
+              alt="Latte Caramel di atas coaster"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <h3>Latte Caramel</h3>
+            <p>Kopi dengan dengan tambahan sirup caramel dan susu segar.</p>
+            <p class="price">Rp25.000</p>
+            <div class="card-actions">
+              <a class="button" href="kontak.html">Tanya produk</a>
+              <a href="produk.html">Lihat produk</a>
             </div>
-        </section>
+          </article>
 
-        <section aria-labelledby="produk-pilihan-title">
-                <h2 id="produk-pilihan-title">Produk Pilihan</h2>
+          <article class="product-card">
+            <img
+              class="product-photo"
+              src="assets/images/Americano.jpg"
+              alt="Segelas Americano"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <h3>Americano</h3>
+            <p>Espresso dengan air, bercita rasa ringan dan pahit.</p>
+            <p class="price">Rp22.000</p>
+            <div class="card-actions">
+              <a class="button" href="kontak.html">Tanya produk</a>
+              <a href="produk.html">Lihat produk</a>
+            </div>
+          </article>
 
-                <div class="product-grid">
-                    <article class="product-card">
-                    <span class="product-badge">Terlaris</span>
-                    <h3>Latte Caramel</h3>
-                    <p>Kopi dengan dengan tambahan sirup caramel dan susu segar.</p>
-                    <p class="priceProduk">Rp13.000</p>
-                    <div class="card-actions">
-                        <a class="button" href="kontak.html">Tanya produk</a>
-                        <a href="#harga-title">Lihat harga</a>
-                    </div>
-                    </article>
+          <article class="product-card">
+            <img
+              class="product-photo"
+              src="assets/images/Kopi Latte Berbusa di atas Coaster.png"
+              alt="Cappuccino dengan susu dan busa susu tebal"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <h3>Capuccino</h3>
+            <p>Kopi dengan susu dan busa susu tebal, disajikan panas.</p>
+            <p class="price">Rp20.000</p>
+            <div class="card-actions">
+              <a class="button" href="kontak.html">Tanya produk</a>
+              <a href="produk.html">Lihat produk</a>
+            </div>
+          </article>
+        </div>
+      </section>
 
-                    <article class="product-card">
-                    <span class="product-badge">Segar</span>
-                    <h3>Americano</h3>
-                    <p>Espresso dengan air, bercita rasa ringan dan pahit.</p>
-                    <p class="priceProduk">Rp13.000</p>
-                    <div class="card-actions">
-                        <a class="button" href="kontak.html">Tanya produk</a>
-                        <a href="#harga-title">Lihat harga</a>
-                    </div>
-                    </article>
+      <section aria-labelledby="produk-pilihan-title">
+        <h2 id="produk-pilihan-title">Produk Pilihan</h2>
+        <div class="product-grid">
+          <article class="product-card">
+            <span class="product-badge">Terlaris</span>
+            <h3>Latte Caramel</h3>
+            <p>Kopi dengan dengan tambahan sirup caramel dan susu segar.</p>
+            <p class="priceProduk">Rp13.000</p>
+            <div class="card-actions">
+              <a class="button" href="kontak.html">Tanya produk</a>
+              <a href="#harga-title">Lihat harga</a>
+            </div>
+          </article>
 
-                    <article class="product-card">
-                    <span class="product-badge">Hemat</span>
-                    <h3>Paket Seduh Rumahan</h3>
-                    <p>Kopi 250 gram, filter, dan panduan seduh untuk pemula.</p>
-                    <p class="priceProduk">Rp50.000</p>
-                    <div class="card-actions">
-                        <a class="button" href="kontak.html">Tanya produk</a>
-                        <a href="#harga-title">Lihat harga</a>
-                    </div>
-                    </article>
-                </div>
-            </section>
-            <section aria-labelledby="harga-title">
-                <h2 id="harga-title">Kategori Seduh Rumahan</h2>
-                <div class="table-scroll" role="region" aria-labelledby="daftar-harga-caption" tabindex="0">
-                    <table>
-                        <caption>Daftar harga paket seduh rumahan Kopi Pojok Kidul</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Ukuran</th>
-                                <th scope="col">Harga</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Kopi Gunung Lumping</th>
-                                <td>250 gram</td>
-                                <td>Rp40.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Cappuccino</th>
-                                <td>250 gram</td>
-                                <td>Rp50.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Kopsu Gula Aren</th>
-                                <td>250 gram</td>
-                                <td>Rp50.000</td>
-                            
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+          <article class="product-card">
+            <span class="product-badge">Segar</span>
+            <h3>Americano</h3>
+            <p>Espresso dengan air, bercita rasa ringan dan pahit.</p>
+            <p class="priceProduk">Rp13.000</p>
+            <div class="card-actions">
+              <a class="button" href="kontak.html">Tanya produk</a>
+              <a href="#harga-title">Lihat harga</a>
+            </div>
+          </article>
 
-            <section aria-labelledby="harga-title">
-                <h2 id="harga-title">Kategori Seduh di Lapak</h2>
-                <div class="table-scroll" role="region" aria-labelledby="daftar-harga-caption" tabindex="0">
-                    <table>
-                        <caption>Daftar harga produk seduh di lapak Kopi Gunung Lumping</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Harga</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Kopi Tubruk Lumping</th>
-                                <td>Rp18.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Americano</th>
-                                <td>Rp22.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Cappuccino</th>
-                                <td>Rp20.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Latte Caramel</th>
-                                <td>Rp25.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Red Velvet</th>
-                                <td>Rp24.000</td>
+          <article class="product-card">
+            <span class="product-badge">Hemat</span>
+            <h3>Paket Seduh Rumahan</h3>
+            <p>Kopi 250 gram, filter, dan panduan seduh untuk pemula.</p>
+            <p class="priceProduk">Rp50.000</p>
+            <div class="card-actions">
+              <a class="button" href="kontak.html">Tanya produk</a>
+              <a href="#harga-title">Lihat harga</a>
+            </div>
+          </article>
+        </div>
+      </section>
 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+      <section aria-labelledby="harga-title">
+        <h2 id="harga-title">Kategori Seduh Rumahan</h2>
+        <div class="table-scroll" role="region" aria-labelledby="caption-rumahan" tabindex="0">
+          <table>
+            <caption id="caption-rumahan">Daftar harga paket seduh rumahan Kopi Gunung Lumping</caption>
+            <thead>
+              <tr>
+                <th scope="col">Produk</th>
+                <th scope="col">Ukuran</th>
+                <th scope="col">Harga</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Kopi Gunung Lumping</th>
+                <td>250 gram</td>
+                <td>Rp40.000</td>
+              </tr>
+              <tr>
+                <th scope="row">Cappuccino</th>
+                <td>250 gram</td>
+                <td>Rp50.000</td>
+              </tr>
+              <tr>
+                <th scope="row">Kopsu Gula Aren</th>
+                <td>250 gram</td>
+                <td>Rp50.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="harga-lapak-title">
+        <h2 id="harga-lapak-title">Kategori Seduh di Lapak</h2>
+        <div class="table-scroll" role="region" aria-labelledby="caption-lapak" tabindex="0">
+          <table>
+            <caption id="caption-lapak">Daftar harga produk seduh di lapak Kopi Gunung Lumping</caption>
+            <thead>
+              <tr>
+                <th scope="col">Produk</th>
+                <th scope="col">Harga</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Kopi Tubruk Lumping</th>
+                <td>Rp18.000</td>
+              </tr>
+              <tr>
+                <th scope="row">Americano</th>
+                <td>Rp22.000</td>
+              </tr>
+              <tr>
+                <th scope="row">Cappuccino</th>
+                <td>Rp20.000</td>
+              </tr>
+              <tr>
+                <th scope="row">Latte Caramel</th>
+                <td>Rp25.000</td>
+              </tr>
+              <tr>
+                <th scope="row">Red Velvet</th>
+                <td>Rp24.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
-    <script src="js/app.js" defer></script>
+
     <footer class="site-footer">
       <p>&copy; 2026 Kopi Gunung Lumping. Data pada halaman ini bersifat dummy.</p>
     </footer>

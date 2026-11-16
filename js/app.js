@@ -1,251 +1,122 @@
-
-// ========================================
-// 1. DATA PRODUK UMKM
-// ========================================
-
+// ===== Data & helper dari P10 =====
 const produkUmkm = [
-  {
-    nama: "Kopi Gunung Lumping",
-    kategori: "Rumahan",
-    berat: 250,
-    harga: 40000,
-    stok: 5,
-    unggulan: true
-  },
-  {
-    nama: "Kopsu Gula Aren",
-    kategori: "Rumahan",
-    berat: 250,
-    harga: 50000,
-    stok: 0,
-    unggulan: false
-  },
-  {
-    nama: "Cappuccino",
-    kategori: "Rumahan",
-    berat: 250,
-    harga: 22000,
-    stok: 10,
-    unggulan: false
-  },
-  {
-    nama: "Latte Caramel",
-    kategori: "Lapak",
-    berat: null,
-    harga: 25000,
-    stok: 15,
-    unggulan: true
-  },
-  {
-    nama: "Red Velvet",
-    kategori: "Lapak",
-    berat: null,
-    harga: 24000,
-    stok: 5,
-    unggulan: false
-  },
-  {
-    nama: "Americano",
-    kategori: "Lapak",
-    berat: null,
-    harga: 22000,
-    stok: 5,
-    unggulan: false
-  }
+  { id: 1, nama: "Kopi Arabika Gayo 250g", kategori: "Kopi", harga: 85000, stok: 24 },
+  { id: 2, nama: "Kopi Robusta Temanggung 250g", kategori: "Kopi", harga: 55000, stok: 4 },
+  { id: 3, nama: "Paket Hampers Pagi", kategori: "Bundling", harga: 150000, stok: 10 },
+  { id: 4, nama: "Paket Coba 3 Rasa", kategori: "Bundling", harga: 120000, stok: 0 },
+  { id: 5, nama: "French Press 350ml", kategori: "Aksesori", harga: 135000, stok: 7 },
+  { id: 6, nama: "Gelas Keramik Nusa", kategori: "Aksesori", harga: 45000, stok: 30 }
 ];
 
-
-// ========================================
-// 2. FUNCTION FORMAT RUPIAH
-// ========================================
-
-function formatRupiah(nilai) {
+function formatRupiah(angka) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0
-  }).format(nilai);
+  }).format(angka);
 }
-
-
-// ========================================
-// 3. FUNCTION STATUS STOK
-// ========================================
 
 function statusStok(stok) {
-  if (stok <= 0) {
-    return {
-      label: "Habis",
-      className: "warning"
-    };
-  }
-
-  if (stok <= 5) {
-    return {
-      label: "Stok terbatas",
-      className: "warning"
-    };
-  }
-
-  return {
-    label: "Tersedia",
-    className: ""
-  };
+  if (stok === 0) return { label: "Stok habis", className: "is-empty" };
+  if (stok <= 5) return { label: `Stok menipis (${stok})`, className: "is-low" };
+  return { label: `Stok tersedia (${stok})`, className: "" };
 }
 
+// ===== Langkah 4: DOM selection =====
+const produkGrid = document.querySelector("#produk-grid");
+const produkStatus = document.querySelector("#produk-status");
+const tombolFilter = document.querySelectorAll("[data-filter]");
 
-// ========================================
-// 4. FUNCTION LABEL KATEGORI
-// ========================================
+// ===== Langkah 5: pembuat elemen =====
+function buatElemenProduk(produk) {
+  const card = document.createElement("article");
+  card.classList.add("product-card");
 
-function labelKategori(kategori) {
-  switch (kategori) {
-    case "Lapak":
-      return "Produk Lapak";
+  const title = document.createElement("h3");
+  title.textContent = produk.nama;
 
-    case "Rumahan":
-      return "Paket Hemat Rumahan";
+  const category = document.createElement("p");
+  category.classList.add("category-note");
+  category.textContent = produk.kategori;
 
-    default:
-      return "Produk UMKM";
-  }
-}
+  const price = document.createElement("p");
+  price.classList.add("price");
+  price.textContent = formatRupiah(produk.harga);
 
-
-// ========================================
-// 5. FUNCTION MEMBUAT KARTU PRODUK
-// ========================================
-
-function buatKartuProduk(produk) {
+  const stock = document.createElement("span");
   const status = statusStok(produk.stok);
+  stock.classList.add("stock-badge");
+  if (status.className) {
+    stock.classList.add(status.className);
+  }
+  stock.textContent = status.label;
 
-  const beratProduk = produk.berat
-    ? `<p>Berat: ${produk.berat} gram</p>`
-    : "";
+  // Langkah 8: tombol sembunyikan (latihan remove)
+  const removeButton = document.createElement("button");
+  removeButton.type = "button";
+  removeButton.textContent = "Sembunyikan";
+  removeButton.classList.add("ghost-button");
+  removeButton.addEventListener("click", () => {
+    card.remove();
+    const sisa = produkGrid.querySelectorAll(".product-card").length;
+    if (sisa === 0) {
+      produkGrid.append(buatEmptyState("ini (semua kartu disembunyikan)"));
+    }
+    produkStatus.textContent = `${sisa} produk tampil. Kartu disembunyikan hanya dari tampilan; data asli tidak berubah.`;
+  });
 
-  return `
-    <article class="product-card js-product-card">
-
-      ${
-        produk.unggulan
-          ? '<span class="featured-badge">Unggulan</span>'
-          : ""
-      }
-
-      <h3>${produk.nama}</h3>
-
-      <p class="category-note">
-        ${labelKategori(produk.kategori)}
-      </p>
-
-      ${beratProduk}
-
-      <p class="price">
-        ${formatRupiah(produk.harga)}
-      </p>
-
-      <span class="stock-badge ${status.className}">
-        ${status.label}
-      </span>
-
-      <div class="card-actions">
-        <a class="button" href="kontak.html">
-          Tanya Produk
-        </a>
-      </div>
-
-    </article>
-  `;
+  card.append(title, category, price, stock, removeButton);
+  return card;
 }
 
+// ===== Langkah 6: empty state & render =====
+function buatEmptyState(kategori) {
+  const empty = document.createElement("p");
+  empty.classList.add("empty-state");
+  empty.textContent = `Belum ada produk pada kategori ${kategori}.`;
+  return empty;
+}
 
-// ========================================
-// 6. FOREACH UNTUK DEBUGGING
-// ========================================
-
-produkUmkm.forEach((produk) => {
-  console.log(
-    "Debug produk:",
-    produk.nama,
-    "stok:",
-    produk.stok
-  );
-});
-
-console.table(produkUmkm);
-
-
-// ========================================
-// 7. FUNCTION RENDER PRODUK
-// ========================================
-
-function renderProduk() {
-
-  // Mengambil elemen HTML
-  const grid = document.querySelector("#produk-dinamis");
-
-  const ringkasan = document.querySelector(
-    "#produk-ringkasan"
-  );
-
-  const unggulan = document.querySelector(
-    "#produk-unggulan"
-  );
-
-
-  // Guard DOM
-  if (!grid || !ringkasan || !unggulan) {
+function renderProduk(kategoriAktif = "Semua") {
+  if (!produkGrid || !produkStatus) {
+    console.warn("Target render produk tidak ditemukan.");
     return;
   }
 
+  const produkTampil = kategoriAktif === "Semua"
+    ? produkUmkm
+    : produkUmkm.filter((produk) => produk.kategori === kategoriAktif);
 
-  // FILTER: mengambil produk yang stoknya tersedia
-  const produkTersedia = produkUmkm.filter(
-    (produk) => produk.stok > 0
-  );
+  produkGrid.replaceChildren();
 
+  if (produkTampil.length === 0) {
+    produkGrid.append(buatEmptyState(kategoriAktif));
+    produkStatus.textContent = "0 produk ditemukan.";
+    return;
+  }
 
-  // FIND: mencari produk unggulan pertama
-  const produkUnggulan = produkUmkm.find(
-    (produk) => produk.unggulan === true
-  );
+  produkTampil.forEach((produk) => {
+    produkGrid.append(buatElemenProduk(produk));
+  });
 
-
-  // MAP: mengubah data produk menjadi HTML
-  const markupProduk = produkTersedia
-    .map(buatKartuProduk)
-    .join("");
-
-
-  // Menampilkan kartu produk
-  grid.innerHTML = markupProduk;
-
-
-  // Menampilkan ringkasan
-  ringkasan.textContent =
-    `${produkTersedia.length} produk tersedia dari ${produkUmkm.length} data.`;
-
-
-  // Menampilkan produk unggulan
-  unggulan.textContent = produkUnggulan
-    ? `Produk unggulan: ${produkUnggulan.nama}`
-    : "Belum ada produk unggulan.";
-
-
-  // Debugging
-  console.log("Jumlah produk tersedia:", produkTersedia.length);
-
-  console.log("Produk unggulan:", produkUnggulan);
-
-  console.table(produkUmkm);
+  produkStatus.textContent = `${produkTampil.length} produk ditampilkan.`;
 }
 
+// ===== Langkah 7: event listener & classList =====
+tombolFilter.forEach((tombol) => {
+  tombol.addEventListener("click", (event) => {
+    const tombolAktif = event.currentTarget;
+    const kategori = tombolAktif.dataset.filter;
 
-// ========================================
-// 8. MENJALANKAN RENDER SETELAH DOM SIAP
-// ========================================
+    tombolFilter.forEach((item) => item.classList.remove("is-active"));
+    tombolAktif.classList.add("is-active");
 
-document.addEventListener(
-  "DOMContentLoaded",
-  renderProduk
-);
+    renderProduk(kategori);
+  });
+});
+
+// Debug cepat (E04): target tidak boleh null
+console.log("produkGrid:", produkGrid);
+console.log("jumlah tombol filter:", tombolFilter.length);
+
+renderProduk();
