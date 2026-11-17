@@ -1,13 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito:wght@400;600;700;800&display=swap");
+
+/* =====================================================
+   Kopi Gunung Lumping - Desain C: "Pagi di Pegunungan"
+   Fajar jingga, kabut hijau, pinus, lavender senja
+   ===================================================== */
 :root {
-  --color-primary: #765548;
-  --color-primary-strong: #5b4035;
-  --color-text: #2f2521;
-  --color-muted: #7d6d65;
-  --color-surface: #ffffff;
-  --color-surface-soft: #f8f3ef;
-  --color-border: #dfd2ca;
-  --color-focus: #b08a5a;
-  --color-cerah: #fde891;
+  --tinta: #2c2a3a;
+  --fajar: #ffd9b8;
+  --jingga: #ff8a4c;
+  --kabut: #e3f1e8;
+  --pinus: #2e6b57;
+  --pinus-tua: #1f4a3d;
+  --lavender: #d9cff5;
+  --mentega: #fff0b8;
+  --awan: #fffdf8;
+
+  --color-primary: var(--jingga);
+  --color-primary-strong: #e5702f;
+  --color-text: var(--tinta);
+  --color-muted: #5f5a70;
+  --color-surface: var(--awan);
+  --color-surface-soft: var(--fajar);
+  --color-border: #ead9c6;
+  --color-focus: var(--pinus);
+  --color-cerah: var(--mentega);
 
   --space-1: 0.5rem;
   --space-2: 0.75rem;
@@ -16,11 +32,14 @@
   --space-5: 2rem;
   --space-6: 3rem;
 
-  --radius-sm: 0.5rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.25rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
 
-  --shadow-card: 0 4px 12px rgb(0 0 0 / 6%);
+  --bayang: 0 10px 28px rgb(46 107 87 / 14%);
+
+  --font-judul: "Young Serif", Georgia, serif;
+  --font-isi: "Nunito", "DM Sans", Arial, sans-serif;
 }
 
 *,
@@ -31,11 +50,11 @@
 
 body {
   margin: 0;
-  color: var(--color-text);
-  background: var(--color-surface-soft);
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  color: var(--tinta);
+  background: linear-gradient(180deg, #ffe6cf 0, #fff3e6 22rem, var(--kabut) 100%) fixed;
+  font-family: var(--font-isi);
+  font-size: 1.03rem;
+  line-height: 1.7;
 }
 
 img {
@@ -44,33 +63,64 @@ img {
 }
 
 .page {
-  width: min(100% - 2rem, 60rem);
+  width: min(100% - 2rem, 62rem);
   margin-inline: auto;
   padding-block: var(--space-6);
 }
 
-.eyebrow {
-  margin: 0 0 var(--space-2);
-  color: var(--color-primary);
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.page > section + section {
+  margin-top: var(--space-6);
 }
 
 h1,
 h2,
-h3 {
+h3,
+.brand {
+  font-family: var(--font-judul);
+  font-weight: 400;
   line-height: 1.2;
   text-wrap: balance;
 }
 
+h1 {
+  font-size: clamp(2.1rem, 5.5vw, 3.3rem);
+}
+
 h2 {
-  margin-block: var(--space-5);
+  margin-block: var(--space-5) var(--space-4);
   text-align: center;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+}
+
+/* siluet gunung kecil di atas judul bagian */
+h2::before {
+  content: "";
+  display: block;
+  width: 2.8rem;
+  height: 1.5rem;
+  margin: 0 auto var(--space-2);
+  background: linear-gradient(90deg, var(--pinus), var(--jingga));
+  clip-path: polygon(0 100%, 30% 25%, 50% 62%, 74% 0, 100% 100%);
 }
 
 h3 {
   margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 var(--space-2);
+  padding: 0.2rem 0.9rem;
+  color: var(--pinus-tua);
+  font-size: 0.85rem;
+  font-weight: 800;
+  background: rgb(255 255 255 / 70%);
+  border-radius: 999px;
+}
+
+.eyebrow:empty {
+  display: none;
 }
 
 /* ============== Fokus & Skip Link ================= */
@@ -79,9 +129,10 @@ h3 {
   position: absolute;
   top: -5rem;
   left: var(--space-3);
+  z-index: 20;
   padding: var(--space-2) var(--space-3);
-  color: var(--color-surface);
-  background: var(--color-text);
+  color: #fff;
+  background: var(--tinta);
 }
 
 .skip-link:focus {
@@ -89,8 +140,12 @@ h3 {
 }
 
 a:focus-visible,
-button:focus-visible {
-  outline: 3px solid var(--color-focus);
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--pinus);
   outline-offset: 3px;
 }
 
@@ -98,51 +153,38 @@ button:focus-visible {
 
 .site-header {
   padding: var(--space-3) var(--space-4);
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--awan);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--bayang);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  margin-bottom: 0;
-  color: var(--color-primary);
-  font-weight: 800;
+  color: var(--pinus-tua);
+  font-size: 1.35rem;
   text-decoration: none;
 }
 
-.brand-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-2);
-  color: var(--color-primary);
-  background: var(--color-surface-soft);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  font-size: 1.6rem;
+.brand::before {
+  content: "";
+  flex: none;
+  width: 1.9rem;
+  height: 1.3rem;
+  background: linear-gradient(90deg, var(--pinus), var(--jingga));
+  clip-path: polygon(0 100%, 30% 25%, 50% 62%, 74% 0, 100% 100%);
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
 }
 
 .brand-name {
-  font-family: "Playfair Display", serif;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-}
-
-.brand-tagline {
-  color: var(--color-muted);
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 1px;
+  font-family: var(--font-judul);
+  font-size: 1.35rem;
+  font-weight: 400;
 }
 
 .nav {
@@ -151,7 +193,7 @@ button:focus-visible {
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-3);
-  width: min(100% - 2rem, 60rem);
+  width: min(100% - 2rem, 62rem);
   margin-inline: auto;
 }
 
@@ -159,252 +201,244 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-1);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .nav li {
-  display: inline-block;
-  margin: 0 var(--space-2) var(--space-1) 0;
+  margin: 0;
 }
 
 .nav a {
-  color: var(--color-text);
+  display: inline-block;
+  padding: 0.35rem var(--space-3);
+  color: var(--tinta);
+  font-weight: 700;
   text-decoration: none;
+  border-radius: 999px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav a:hover {
+  background: var(--lavender);
 }
 
 .nav a[aria-current="page"] {
-  padding: var(--space-1) var(--space-2);
-  color: var(--color-primary-strong);
-  font-weight: 700;
-  background: var(--color-cerah);
-  border-radius: var(--radius-sm);
+  color: #fff;
+  background: var(--pinus);
 }
 
-/* ============== Tombol Umum ================= */
-
-button {
-  display: inline-block;
-  padding: var(--space-2) var(--space-3);
-  color: var(--color-surface);
-  font: inherit;
+.mobile-menu summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.35rem var(--space-3);
+  color: #fff;
   font-weight: 700;
   cursor: pointer;
-  background: var(--color-primary);
+  background: var(--pinus);
+  border-radius: 999px;
+  list-style: none;
+}
+
+.mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-menu ul {
+  margin-top: var(--space-2);
+  padding: var(--space-2);
+  background: var(--kabut);
+  border-radius: var(--radius-md);
+}
+
+/* ============== Tombol ================= */
+
+button,
+.button {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--jingga);
   border: 0;
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgb(255 138 76 / 40%);
+  transition: transform 0.15s, background-color 0.2s;
 }
 
 button:hover {
   background: var(--color-primary-strong);
+  transform: translateY(-2px);
 }
 
 /* ============== Hero ================= */
 
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-5);
-  color: var(--color-surface);
-  background: var(--color-primary);
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-5) 7rem;
+  overflow: hidden;
+  color: var(--tinta);
+  background:
+    radial-gradient(circle at 85% 22%, #fff3c4 0 4rem, rgb(255 243 196 / 0%) 9rem),
+    linear-gradient(180deg, #ffb98a, var(--fajar) 70%);
   border-radius: var(--radius-lg);
+  box-shadow: var(--bayang);
 }
 
-.hero-content {
+/* dua lapis gunung di bagian bawah hero */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  height: 6rem;
+  background: #7fb59f;
+  clip-path: polygon(0 70%, 18% 25%, 35% 65%, 55% 15%, 78% 60%, 100% 30%, 100% 100%, 0 100%);
+}
+
+.hero::after {
+  height: 4.2rem;
+  background: var(--pinus);
+  clip-path: polygon(0 55%, 22% 85%, 45% 30%, 68% 80%, 100% 40%, 100% 100%, 0 100%);
+}
+
+.hero-content,
+.hero-media {
+  position: relative;
+  z-index: 1;
   min-width: 0;
 }
 
 .hero h1 {
-  margin-top: 0;
-  margin-bottom: var(--space-2);
+  margin: 0 0 var(--space-3);
+  color: var(--pinus-tua);
 }
 
-.hero-image {
+.hero p {
+  max-width: 34rem;
+}
+
+/* foto berbentuk jendela lengkung */
+.hero-image,
+.hero-media img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 320px;
-  margin-top: var(--space-3);
-  border-radius: var(--radius-md);
+  border: 6px solid var(--awan);
+  border-radius: 999px 999px var(--radius-md) var(--radius-md);
+  box-shadow: 0 12px 28px rgb(44 42 58 / 22%);
   object-fit: cover;
 }
 
+.hero-badge:empty {
+  display: none;
+}
+
 .hero button {
-  color: var(--color-text);
-  background: var(--color-surface);
+  color: var(--pinus-tua);
+  background: var(--awan);
+  box-shadow: 0 6px 16px rgb(44 42 58 / 18%);
 }
 
 .hero button:hover {
-  background: var(--color-cerah);
+  background: var(--mentega);
 }
 
-/* ============== Beranda: daftar produk ================= */
-
-.product-list {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: start;
-  gap: 1rem;
-}
-
-.product-list > h2 {
-  grid-column: 1 / -1;
-  margin: 0;
-}
-
-.product-list > .hero-image {
+figure > .hero-image {
   height: auto;
-  min-height: 0;
-  margin: 0;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 12px;
-}
-
-.home-product-cards,
-.product-cards {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: stretch;
-  gap: 12px;
-  width: 100%;
-}
-
-.home-product-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 0;
-  padding: 14px 12px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  text-align: center;
-  overflow-wrap: anywhere;
-}
-
-.home-product-card h3 {
-  width: 100%;
-  min-height: 42px;
-  margin: 0 0 12px;
-  color: var(--color-primary);
-  font-size: 1rem;
-  line-height: 1.4;
-}
-
-.home-product-card p {
-  margin: 8px 0;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.home-product-card .price {
-  margin-top: auto;
-  padding-top: 8px;
-}
-
-.home-product-card .price a {
-  display: inline-block;
-  padding: 9px 12px;
-  color: var(--color-focus);
-  font-weight: 400;
-  white-space: nowrap;
-  text-decoration: none;
-  border: 1px solid var(--color-focus);
-  border-radius: 9px;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.home-product-card .price a:hover {
-  color: #fff;
-  background-color: var(--color-primary);
-  text-decoration: none;
-}
-
-.price {
-  color: #8b4b27;
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.price a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.price a:hover {
-  color: var(--color-primary-strong);
-  text-decoration: underline;
-}
-
-/* ============== Footer ================= */
-
-.site-footer {
-  margin-top: var(--space-5);
-  padding: var(--space-3) var(--space-4);
-  color: var(--color-surface);
-  text-align: center;
-  background: var(--color-text);
-  border-top: 1px solid var(--color-border);
-}
-
-/* ============== Gambar, figure, audio, galeri ================= */
-
-figure {
-  margin: 0 0 var(--space-4);
-}
-
-figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+  max-height: 26rem;
   border-radius: var(--radius-md);
 }
 
-figcaption,
-caption {
-  color: var(--color-muted);
+/* ============== Kartu umum ================= */
+
+.info-card,
+.nilai-card,
+.media-card,
+.product-card {
+  background: var(--awan);
+  border-radius: var(--radius-md);
+  box-shadow: var(--bayang);
 }
 
-figcaption {
-  margin-top: var(--space-2);
+.info-card,
+.nilai-card {
+  margin-bottom: var(--space-3);
+  padding: var(--space-4);
 }
 
-.gallery-grid {
+.info-card h3,
+.nilai-card h3 {
+  color: var(--pinus-tua);
+}
+
+.info-card p,
+.nilai-card p {
+  margin: 0 0 var(--space-1);
+}
+
+/* warna pastel kartu bergantian */
+.info-card:nth-child(4n + 1),
+.nilai-card:nth-child(4n + 1) {
+  background: var(--mentega);
+}
+
+.info-card:nth-child(4n + 2),
+.nilai-card:nth-child(4n + 2) {
+  background: var(--lavender);
+}
+
+.info-card:nth-child(4n + 3),
+.nilai-card:nth-child(4n + 3) {
+  background: #cfeadb;
+}
+
+.info-card:nth-child(4n),
+.nilai-card:nth-child(4n) {
+  background: var(--fajar);
+}
+
+.info-section {
+  padding: var(--space-4);
+  background: rgb(255 255 255 / 55%);
+  border-radius: var(--radius-lg);
+}
+
+.info-section .info-card:last-child {
+  margin-bottom: 0;
+}
+
+.nilai-list {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 }
 
-#audio-title {
-  color: var(--color-primary);
-  text-align: center;
+.nilai-list .info-card {
+  margin-bottom: 0;
 }
 
-#audio-note {
-  max-width: 700px;
-  margin: 0 auto var(--space-3);
-  color: var(--color-muted);
-  text-align: center;
-}
-
-audio {
-  display: block;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* ============== Halaman Produk: kartu ================= */
+/* ============== Produk ================= */
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-3);
+  gap: var(--space-4);
   margin-block: var(--space-4);
 }
 
@@ -414,134 +448,105 @@ audio {
   flex-direction: column;
   margin: 0;
   padding: var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.product-photo {
+  display: block;
+  width: calc(100% + 3rem);
+  max-width: none;
+  height: 12rem;
+  margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) var(--space-3);
+  object-fit: cover;
 }
 
 .product-card h3 {
-  margin-top: 0;
-  margin-bottom: var(--space-3);
-  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+  color: var(--pinus-tua);
   text-align: left;
 }
 
 .product-badge + h3 {
-  margin-top: var(--space-5);
+  margin-top: var(--space-4);
 }
 
 .product-card p {
-  margin-top: 0;
-  margin-bottom: var(--space-3);
+  margin: 0 0 var(--space-3);
   text-align: left;
 }
 
+.price,
 .product-card .priceProduk {
   margin-top: auto;
-  color: var(--color-primary);
-  font-weight: 700;
+  color: #d4551a;
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
 .product-badge {
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
-  padding: 2px 5px;
-  color: var(--color-surface);
-  background: var(--color-focus);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 0.7rem;
+  padding: 0.15rem 0.8rem;
+  color: var(--pinus-tua);
+  font-size: 0.78rem;
+  font-weight: 800;
+  background: var(--mentega);
+  border-radius: 999px;
+  box-shadow: 0 3px 8px rgb(44 42 58 / 15%);
 }
 
 .card-actions {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-2);
   margin-top: var(--space-2);
 }
 
 .card-actions a {
   display: inline-block;
-  padding: var(--space-2);
-  color: var(--color-primary);
+  padding: 0.35rem var(--space-3);
+  color: var(--pinus);
+  font-weight: 700;
   text-align: center;
   text-decoration: none;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  background: var(--kabut);
+  border-radius: 999px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .card-actions .button {
-  color: var(--color-surface);
-  background: var(--color-focus);
+  color: #fff;
+  background: var(--pinus);
+  box-shadow: none;
 }
 
-.card-actions .button:hover {
-  background: var(--color-primary);
-}
-
+.card-actions .button:hover,
 .card-actions a:not(.button):hover {
-  color: var(--color-surface);
-  background: var(--color-primary);
+  color: #fff;
+  background: var(--jingga);
 }
 
-/* ============== Tabel ================= */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table-scroll {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.table-scroll:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
-}
-
-.table-scroll table {
-  min-width: 40rem;
-}
-
-caption {
-  margin-bottom: var(--space-2);
-  color: var(--color-primary);
-  font-weight: 700;
-  text-align: left;
-}
-
-th,
-td {
-  padding: var(--space-2);
-  text-align: left;
-  border: 1px solid var(--color-border);
-}
-
-th {
-  color: var(--color-text);
-  background: var(--color-surface-soft);
-}
-
-/* ============== P10-P11: katalog dinamis ================= */
+/* ============== Katalog dinamis ================= */
 
 .produk-status,
 #produk-ringkasan {
   margin: 0 0 var(--space-2);
-  color: #665044;
+  color: var(--color-muted);
 }
 
 #produk-unggulan {
+  display: inline-block;
   margin-bottom: var(--space-3);
-  color: #6f3b1f;
-  font-weight: 700;
+  padding: 0.3rem 1rem;
+  color: var(--pinus-tua);
+  font-weight: 800;
+  background: var(--mentega);
+  border-radius: 999px;
 }
 
-/* ID mengalahkan .product-grid, jadi tidak bentrok dengan media query */
 #produk-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
@@ -550,159 +555,199 @@ th {
 
 .category-note {
   margin: 0 0 var(--space-2);
-  color: #80624f;
-  font-size: 0.9rem;
+  color: var(--pinus);
+  font-size: 0.88rem;
+  font-weight: 800;
 }
 
 .stock-badge {
   display: inline-flex;
   align-self: flex-start;
-  margin-block-start: var(--space-2);
-  padding: 0.3rem 0.75rem;
-  color: #166534;
+  margin-block: var(--space-2);
+  padding: 0.2rem 0.8rem;
+  color: var(--pinus-tua);
   font-size: 0.85rem;
-  font-weight: 700;
-  background: #dcfce7;
+  font-weight: 800;
+  background: #cfeadb;
   border-radius: 999px;
 }
 
 .stock-badge.warning,
 .stock-badge.is-low {
-  color: #92400e;
-  background: #fef3c7;
+  color: #7a4300;
+  background: var(--mentega);
 }
 
 .stock-badge.empty,
 .stock-badge.is-empty {
-  color: #991b1b;
-  background: #fee2e2;
+  color: #8f2a1c;
+  background: #ffd4cb;
 }
 
 .featured-badge {
   display: inline-flex;
   align-self: flex-end;
   margin-block: var(--space-2);
-  padding: 0.3rem 0.75rem;
-  color: #92400e;
+  padding: 0.2rem 0.8rem;
   font-size: 0.85rem;
-  font-weight: 700;
-  background: #fef3c7;
+  font-weight: 800;
+  background: var(--mentega);
   border-radius: 999px;
 }
 
-/* Filter kategori (P11) */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.75rem;
-  margin-block: 1rem 1.5rem;
+  gap: var(--space-2);
+  margin-block: var(--space-3) var(--space-4);
 }
 
 .filter-button {
-  padding: 0.65rem 1rem;
-  color: var(--color-text);
-  font-weight: 700;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  cursor: pointer;
+  padding: 0.5rem 1.1rem;
+  color: var(--tinta);
+  background: var(--awan);
+  box-shadow: 0 3px 10px rgb(46 107 87 / 12%);
 }
 
-.filter-button:hover,
-.filter-button:focus-visible {
-  color: var(--color-text);
-  background: var(--color-surface);
-  border-color: var(--color-primary);
-  outline: 3px solid rgb(118 85 72 / 25%);
-  outline-offset: 2px;
+.filter-button:hover {
+  color: var(--tinta);
+  background: var(--lavender);
 }
 
 .filter-button.is-active,
 .filter-button.is-active:hover {
-  color: #ffffff;
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+  color: #fff;
+  background: var(--pinus);
 }
 
-/* Tombol Sembunyikan (latihan remove) */
 .ghost-button {
   align-self: flex-start;
   margin-top: var(--space-2);
-  padding: 0.4rem 0.8rem;
-  color: var(--color-primary);
-  background: transparent;
-  border: 1px solid var(--color-border);
+  padding: 0.3rem 0.9rem;
+  color: var(--pinus);
+  font-size: 0.9rem;
+  background: var(--kabut);
+  box-shadow: none;
 }
 
 .ghost-button:hover {
-  color: var(--color-primary-strong);
-  background: var(--color-surface-soft);
-  border-color: var(--color-primary);
+  color: #fff;
+  background: var(--pinus);
 }
 
-/* Empty state */
 .empty-state {
   grid-column: 1 / -1;
-  padding: 1rem;
-  color: #64748b;
+  padding: var(--space-4);
+  color: var(--color-muted);
   text-align: center;
-  background: var(--color-surface);
-  border: 1px dashed #94a3b8;
-  border-radius: 1rem;
+  background: rgb(255 255 255 / 60%);
+  border: 2px dashed var(--pinus);
+  border-radius: var(--radius-md);
 }
 
-/* ============== Tentang ================= */
+/* ============== Tabel ================= */
 
-.about-image {
+table {
+  width: 100%;
+  overflow: hidden;
+  background: var(--awan);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--bayang);
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table-scroll table {
+  min-width: 32rem;
+}
+
+caption {
+  margin-bottom: var(--space-2);
+  color: var(--pinus-tua);
+  font-weight: 800;
+  text-align: left;
+}
+
+th,
+td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+thead th {
+  color: #fff;
+  background: var(--pinus);
+}
+
+tbody th {
+  background: var(--kabut);
+}
+
+tbody tr:hover td {
+  background: var(--mentega);
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ============== Galeri ================= */
+
+figure {
+  margin: 0 0 var(--space-4);
+}
+
+figure img {
   display: block;
   width: 100%;
-  max-width: 680px;
   height: auto;
-  margin: 25px auto;
-  object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgb(0 0 0 / 15%);
-}
-
-.about-card {
-  width: 90%;
-  max-width: 720px;
-  margin: 35px auto;
-  padding: 25px;
-  color: #ffffff;
-  background-color: #795548;
-  border-radius: 18px;
-}
-
-.nilai-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin-block: var(--space-4);
-}
-
-.nilai-card {
-  padding: var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
 }
 
-.nilai-card h3 {
-  margin-top: 0;
-  color: var(--color-primary);
+figcaption {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
 }
 
-.nilai-card p {
-  margin-bottom: 0;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
 }
 
-.nilai-icon {
-  margin-bottom: var(--space-3);
-  color: var(--color-primary);
-  font-size: 36px;
+.media-card {
+  margin: 0;
+  padding: var(--space-2);
+}
+
+.media-card img {
+  border-radius: var(--radius-sm);
+}
+
+.media-card figcaption {
+  padding: 0 var(--space-2) var(--space-1);
+}
+
+#audio-note {
+  max-width: 44rem;
+  margin: 0 auto var(--space-3);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+audio {
+  display: block;
+  width: 100%;
+  max-width: 38rem;
+  margin: 0 auto;
 }
 
 /* ============== Kontak ================= */
@@ -712,18 +757,17 @@ th {
 }
 
 #konten > p {
-  max-width: 700px;
+  max-width: 44rem;
   margin: var(--space-3) auto;
 }
 
 #form-kontak {
-  max-width: 700px;
+  max-width: 44rem;
   margin: var(--space-4) auto;
-  padding: var(--space-3);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+  background: var(--awan);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--bayang);
 }
 
 #form-kontak .field {
@@ -732,149 +776,205 @@ th {
 
 #form-kontak label {
   display: block;
-  margin-bottom: var(--space-1);
+  margin-bottom: 0.25rem;
+  font-weight: 700;
 }
 
 #form-kontak input[type="text"],
 #form-kontak input[type="email"],
 #form-kontak input[type="tel"],
-#form-kontak input[type="date"],
-#form-kontak input[type="time"],
 #form-kontak select,
 #form-kontak textarea {
   width: 100%;
-  padding: var(--space-2);
-  color: var(--color-text);
+  padding: var(--space-2) var(--space-3);
+  color: var(--tinta);
   font: inherit;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--kabut);
+  border: 2px solid transparent;
   border-radius: var(--radius-sm);
+}
+
+#form-kontak input:focus,
+#form-kontak select:focus,
+#form-kontak textarea:focus {
+  background: #fff;
+  border-color: var(--pinus);
 }
 
 #form-kontak fieldset {
   margin: 0 0 var(--space-3);
   padding: var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: 2px solid var(--kabut);
+  border-radius: var(--radius-md);
+}
+
+#form-kontak legend {
+  padding: 0 var(--space-2);
+  color: var(--pinus-tua);
+  font-weight: 800;
 }
 
 #form-kontak fieldset label {
-  margin-top: var(--space-2);
+  margin-top: var(--space-1);
+  font-weight: 600;
 }
 
 #form-kontak input[type="radio"] {
   margin-right: var(--space-1);
+  accent-color: var(--jingga);
 }
 
 #preview-form {
-  max-width: 700px;
+  max-width: 44rem;
   margin: var(--space-3) auto;
   padding: var(--space-3);
+  color: #e3f1e8;
   white-space: pre-wrap;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  background: var(--pinus-tua);
+  border-radius: var(--radius-md);
 }
 
-#kontak-lanjut {
-  max-width: 700px;
-  margin: var(--space-4) auto;
+.contact-section {
+  max-width: 44rem;
+  margin: var(--space-5) auto 0;
+  padding: var(--space-5) var(--space-4);
   text-align: center;
+  background: linear-gradient(135deg, var(--lavender), var(--fajar));
+  border-radius: var(--radius-lg);
+}
+
+.contact-section h2 {
+  margin-top: 0;
+}
+
+.contact-section a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  background: #1f9d5a;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgb(31 157 90 / 35%);
+  transition: background-color 0.2s;
+}
+
+.contact-section a:hover {
+  background: #167a45;
+}
+
+/* ============== Footer ================= */
+
+.site-footer {
+  position: relative;
+  margin-top: 5rem;
+  padding: var(--space-4);
+  color: var(--kabut);
+  text-align: center;
+  background: var(--pinus-tua);
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 100% 0;
+  height: 3rem;
+  background: var(--pinus-tua);
+  clip-path: polygon(0 100%, 12% 40%, 25% 80%, 42% 10%, 60% 70%, 80% 25%, 100% 75%, 100% 100%);
+}
+
+.site-footer p {
+  margin: 0;
 }
 
 /* ============== Responsive ================= */
 
-/* HP */
 @media (max-width: 41.99rem) {
   .page {
-    width: min(100% - 1rem, 60rem);
-    padding-block: var(--space-3);
+    width: min(100% - 1.25rem, 62rem);
+    padding-block: var(--space-4);
   }
 
   .hero {
-    padding: var(--space-3);
+    padding: var(--space-4) var(--space-3) 6rem;
   }
 
-  .hero-image {
-    height: auto;
-    margin-top: 0;
-  }
-
-  .home-product-cards,
-  .product-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2);
-  }
-
-  .home-product-card {
-    padding: var(--space-2);
-  }
-
-  .home-product-card h3 {
-    min-height: 0;
-    font-size: 0.9rem;
-  }
-
-  .home-product-card .price a {
-    padding: 6px 8px;
-    white-space: normal;
+  .hero-image,
+  .hero-media img {
+    height: 240px;
   }
 
   .product-grid,
-  .nilai-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   #produk-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .card-actions {
-    flex-wrap: wrap;
-  }
-
-  .about-card {
-    width: 94%;
-    padding: 18px;
-  }
 }
 
-/* Tablet */
 @media (min-width: 42rem) {
   .nav ul {
     flex-direction: row;
   }
 
-  .gallery-grid {
+  .gallery-grid,
+  .nilai-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .home-product-cards,
-  .product-cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .info-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .info-section > h2 {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+
+  .info-section .info-card {
+    margin-bottom: 0;
   }
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 42rem) and (max-width: 59.99rem) {
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Desktop */
 @media (min-width: 60rem) {
   .nav {
     flex-direction: row;
     align-items: center;
   }
 
-  .product-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    padding: var(--space-6) var(--space-6) 8rem;
   }
 
-  .home-product-cards,
-  .product-cards {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .nilai-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+  }
+
+  .desktop-menu {
+    display: flex !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-menu {
+    display: block !important;
+  }
+
+  .desktop-menu {
+    display: none !important;
   }
 }
 
@@ -882,26 +982,8 @@ th {
   * {
     transition: none !important;
   }
-}
 
-
-@media screen and (min-width: 769px) {
-    .mobile-menu {
-        display: none !important;
-    }
-
-    .desktop-menu {
-        display: flex !important;
-    }
-}
-
-/* Tampilkan hamburger hanya pada HP */
-@media screen and (max-width: 768px) {
-    .mobile-menu {
-        display: block !important;
-    }
-
-    .desktop-menu {
-        display: none !important;
-    }
+  button:hover {
+    transform: none;
+  }
 }

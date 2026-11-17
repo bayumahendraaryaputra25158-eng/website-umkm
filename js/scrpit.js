@@ -2,7 +2,7 @@ const promoButton = document.getElementById("promoButton");
 
 if (promoButton) {
   promoButton.addEventListener("click", function () {
-    promoButton.textContent = "Promo hari ini: Beli 2 Cold Brew Gratis 1 Kopi Tubruk Signature!";
+    promoButton.textContent = "Promo hari ini: Beli 2 Latte Caramel Gratis 1 Kopi Tubruk Lumping!";
   });
 }
 
